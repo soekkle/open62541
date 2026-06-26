@@ -78,6 +78,9 @@ UA_SecureChannel_generateLocalKeys(const UA_SecureChannel *channel) {
     res = sp->generateKey(sp, cc, &channel->remoteNonce, &channel->localNonce, &buf);
     UA_CHECK_STATUS(res, goto error);
 
+    if (channel->keyLogger) 
+        channel->keyLogger->localLogger(channel->securityToken, localEncryptingKey, localIv, channel->keyLogger->keyLoggerContext);
+
     /* Set the channel context */
     res |= sp->setLocalSymSigningKey(sp, cc, &localSigningKey);
     res |= sp->setLocalSymEncryptingKey(sp, cc, &localEncryptingKey);
@@ -125,6 +128,10 @@ generateRemoteKeys(const UA_SecureChannel *channel) {
     /* Generate key */
     res = sp->generateKey(sp, cc, &channel->localNonce, &channel->remoteNonce, &buf);
     UA_CHECK_STATUS(res, goto error);
+
+
+    if (channel->keyLogger)
+        channel->keyLogger->localLogger(channel->securityToken, remoteEncryptingKey, remoteIv, channel->keyLogger->keyLoggerContext);
 
     /* Set the channel context */
     res |= sp->setRemoteSymSigningKey(sp, cc, &remoteSigningKey);

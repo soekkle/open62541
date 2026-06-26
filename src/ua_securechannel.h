@@ -91,6 +91,14 @@ typedef enum {
     UA_SECURECHANNELRENEWSTATE_NEWTOKEN_CLIENT
 } UA_SecureChannelRenewState;
 
+
+
+typedef struct UA_SecureChannelKeyLogger {
+    void (*localLogger)(UA_ChannelSecurityToken token, const UA_ByteString key, UA_ByteString iv, void* keyLoggerContext);
+    void (*remoteLogger)(UA_ChannelSecurityToken token, const UA_ByteString key, UA_ByteString iv, void* keyLoggerContext);
+    void* keyLoggerContext;
+} UA_SecureChannelKeyLogger;
+
 struct UA_SecureChannel {
     UA_SecureChannelState state;
     UA_SecureChannelRenewState renewState;
@@ -162,6 +170,8 @@ struct UA_SecureChannel {
     void *processOPNHeaderApplication;
     UA_StatusCode (*processOPNHeader)(void *application, UA_SecureChannel *channel,
                                       const UA_AsymmetricAlgorithmSecurityHeader *asymHeader);
+
+    UA_SecureChannelKeyLogger* keyLogger;
 };
 
 void UA_SecureChannel_init(UA_SecureChannel *channel);
