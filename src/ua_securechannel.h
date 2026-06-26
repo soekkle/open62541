@@ -138,6 +138,12 @@ UA_SecureChannel_httpSecurityMode(UA_Boolean useTls) {
                   : UA_MESSAGESECURITYMODE_NONE;
 }
 
+typedef struct UA_SecureChannelKeyLogger {
+    void (*localLogger)(UA_ChannelSecurityToken token, const UA_ByteString key, UA_ByteString iv, void* keyLoggerContext);
+    void (*remoteLogger)(UA_ChannelSecurityToken token, const UA_ByteString key, UA_ByteString iv, void* keyLoggerContext);
+    void* keyLoggerContext;
+} UA_SecureChannelKeyLogger;
+
 struct UA_SecureChannel {
     UA_SecureChannelState state;
     UA_SecureChannelRenewState renewState;
@@ -271,6 +277,8 @@ struct UA_SecureChannel {
     void *processOPNHeaderApplication;
     UA_StatusCode (*processOPNHeader)(void *application, UA_SecureChannel *channel,
                                       const UA_AsymmetricAlgorithmSecurityHeader *asymHeader);
+
+    UA_SecureChannelKeyLogger* keyLogger;
 };
 
 /* Transport confidentiality and OPC UA application signatures are separate
@@ -557,9 +565,7 @@ setBufPos(UA_MessageContext *mc);
 
 UA_StatusCode
 checkSymHeader(UA_SecureChannel *channel, const UA_UInt32 tokenId,
-               UA_DateTime nowMonotonic);
-
-UA_StatusCode
+StatusCode
 checkAsymHeader(UA_SecureChannel *channel,
                 const UA_AsymmetricAlgorithmSecurityHeader *asymHeader);
 
