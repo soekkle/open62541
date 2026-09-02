@@ -28,6 +28,7 @@
 #include <open62541/plugin/log.h>
 #include <open62541/plugin/eventloop.h>
 #include <open62541/plugin/securitypolicy.h>
+#include <open62541/plugin/securitykeylog.h>
 
 /* Forward declarations */
 struct UA_Client;
@@ -715,6 +716,8 @@ struct UA_ClientConfig {
      * separate and unaffected by this rule. The comparison is skipped when
      * an EndpointDescription was configured directly. */
     UA_RuleHandling endpointDescriptionRule;
+
+    UA_SecureChannelKeyLogger keyLogger;
 
     /* SecurityPolicies for authentication with an x509 certificate. The
      * UserIdentityToken contains only the certificate. The certificate gets

@@ -32,6 +32,7 @@
 #include <open62541/plugin/eventloop.h>
 #include <open62541/plugin/accesscontrol.h>
 #include <open62541/plugin/securitypolicy.h>
+#include <open62541/plugin/securitykeylog.h>
 
 #ifdef UA_ENABLE_HISTORIZING
 #include <open62541/plugin/historydatabase.h>
@@ -2471,6 +2472,8 @@ struct UA_ServerConfig {
 
     /* See the AccessControl Plugin API */
     UA_AccessControl accessControl;
+
+    UA_SecureChannelKeyLogger keyLogger;
 
     /* Nodes and Node Lifecycle
      * ~~~~~~~~~~~~~~~~~~~~~~~~
