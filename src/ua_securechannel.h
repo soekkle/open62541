@@ -20,7 +20,11 @@ typedef struct UA_SecureChannel UA_SecureChannel;
 #include <open62541/plugin/log.h>
 #include <open62541/plugin/securitypolicy.h>
 #include <open62541/plugin/eventloop.h>
+<<<<<<< HEAD
 #include <open62541/plugin/certificategroup.h>
+=======
+#include <open62541/plugin/securitykeylog.h>
+>>>>>>> 9220fe36d (Add Keylog plugin to secure channel)
 #include <open62541/transport_generated.h>
 
 #include "open62541_queue.h"
@@ -119,6 +123,7 @@ typedef enum {
     UA_SECURECHANNELRENEWSTATE_NEWTOKEN_CLIENT
 } UA_SecureChannelRenewState;
 
+<<<<<<< HEAD
 /* The transport and message encoding are fixed for the lifetime of a
  * SecureChannel. TCP and WebSocket both use UACP. HTTP carries service
  * messages directly without UACP framing. */
@@ -144,6 +149,8 @@ typedef struct UA_SecureChannelKeyLogger {
     void* keyLoggerContext;
 } UA_SecureChannelKeyLogger;
 
+=======
+>>>>>>> 9220fe36d (Add Keylog plugin to secure channel)
 struct UA_SecureChannel {
     UA_SecureChannelState state;
     UA_SecureChannelRenewState renewState;

@@ -224,7 +224,6 @@ generateRemoteKeys(UA_SecureChannel *channel) {
                          &secretInput, &secretCombined);
     UA_CHECK_STATUS(res, goto error);
 
-<<<<<<< HEAD
     /* Generate key. The policy's wrapper XORs the previous accumulator
      * with the new shared secret and writes the result (IKM_n) back
      * into secretCombined. */
@@ -241,11 +240,8 @@ generateRemoteKeys(UA_SecureChannel *channel) {
         res = UA_STATUSCODE_BADOUTOFMEMORY;
         goto error;
     }
-=======
-
     if (channel->keyLogger)
         channel->keyLogger->localLogger(channel->securityToken, remoteEncryptingKey, remoteIv, channel->keyLogger->keyLoggerContext);
->>>>>>> 51ac20b2f (VIP Add Logging Interface)
 
     /* Set the channel context */
     res |= sp->setRemoteSymSigningKey(sp, cc, &remoteSigningKey);
