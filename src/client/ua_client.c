@@ -151,6 +151,7 @@ UA_Client_newWithConfig(const UA_ClientConfig *config) {
 
     UA_SecureChannel_init(&client->channel);
     client->channel.config = client->config.localConnectionConfig;
+    client->channel.keyLogger = &client->config.keyLogger;
     client->connectStatus = UA_STATUSCODE_GOOD;
 
 #if UA_MULTITHREADING >= 100
@@ -211,6 +212,12 @@ UA_ClientConfig_clear(UA_ClientConfig *config) {
 
     if(config->certificateVerification.clear)
         config->certificateVerification.clear(&config->certificateVerification);
+
+
+    if (config->keyLogger.deleter)
+    {
+        config->keyLogger.deleter(&config->keyLogger.keyLoggerContext);
+    }
 
     /* Delete the SecurityPolicies */
     if(config->securityPolicies != 0) {

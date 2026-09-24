@@ -3099,6 +3099,7 @@ UA_Client_startListeningForReverseConnect(UA_Client *client,
     client->channel.processOPNHeader = verifyClientSecureChannelHeader;
     client->channel.processOPNHeaderApplication = client;
     client->channel.connectionId = 0;
+    client->channel.keyLogger = &client->config.keyLogger;
 
     setConnectStatus(client, initSecurityPolicy(client, NULL));
     if(client->connectStatus != UA_STATUSCODE_GOOD)
