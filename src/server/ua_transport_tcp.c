@@ -568,6 +568,7 @@ createServerSecureChannel(UA_Server *server,
     channel->processOPNHeaderApplication = server;
     channel->connectionManager = cm;
     channel->connectionId = connectionId;
+    channel->keyLogger = &server->config.keyLogger;
 
     /* The remote addresss is given in the very first callback from the
      * ConnectionManager. */

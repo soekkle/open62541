@@ -20,6 +20,11 @@ UA_ServerConfig_clear(UA_ServerConfig *config) {
     UA_BuildInfo_clear(&config->buildInfo);
     UA_ApplicationDescription_clear(&config->applicationDescription);
 
+    if (config->keyLogger.deleter)
+    {
+        config->keyLogger.deleter(&config->keyLogger.keyLoggerContext);
+    }
+
     /* Stop and delete the EventLoop */
     UA_EventLoop *el = config->eventLoop;
     if(el && !config->externalEventLoop) {
