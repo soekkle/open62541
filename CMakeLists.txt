@@ -915,6 +915,7 @@ set(exported_headers ${PROJECT_BINARY_DIR}/src_generated/open62541/config.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/plugin/securitypolicy.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/plugin/eventloop.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/plugin/historydatabase.h
+                     ${PROJECT_SOURCE_DIR}/include/open62541/plugin/securitykeylog.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/client.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/client_highlevel_async.h
                      ${PROJECT_SOURCE_DIR}/include/open62541/client_subscriptions.h
@@ -1283,7 +1284,8 @@ set(plugin_sources ${PROJECT_SOURCE_DIR}/plugins/ua_log_stdout.c
                    ${PROJECT_SOURCE_DIR}/plugins/ua_nodestore_ziptree.c
                    ${PROJECT_SOURCE_DIR}/plugins/ua_config_default.c
                    ${PROJECT_SOURCE_DIR}/plugins/crypto/ua_certificategroup_none.c
-                   ${PROJECT_SOURCE_DIR}/plugins/crypto/ua_securitypolicy_none.c)
+                   ${PROJECT_SOURCE_DIR}/plugins/crypto/ua_securitypolicy_none.c
+                   ${PROJECT_SOURCE_DIR}/plugins/crypto/ua_tls_key_logger.c)
 
 # Add clock implementation based on the base architecture
 if(UA_ARCHITECTURE_POSIX OR UA_ENABLE_AMALGAMATION)
