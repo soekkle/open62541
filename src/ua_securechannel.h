@@ -20,11 +20,8 @@ typedef struct UA_SecureChannel UA_SecureChannel;
 #include <open62541/plugin/log.h>
 #include <open62541/plugin/securitypolicy.h>
 #include <open62541/plugin/eventloop.h>
-<<<<<<< HEAD
 #include <open62541/plugin/certificategroup.h>
-=======
 #include <open62541/plugin/securitykeylog.h>
->>>>>>> 9220fe36d (Add Keylog plugin to secure channel)
 #include <open62541/transport_generated.h>
 
 #include "open62541_queue.h"
@@ -123,7 +120,6 @@ typedef enum {
     UA_SECURECHANNELRENEWSTATE_NEWTOKEN_CLIENT
 } UA_SecureChannelRenewState;
 
-<<<<<<< HEAD
 /* The transport and message encoding are fixed for the lifetime of a
  * SecureChannel. TCP and WebSocket both use UACP. HTTP carries service
  * messages directly without UACP framing. */
@@ -143,14 +139,6 @@ UA_SecureChannel_httpSecurityMode(UA_Boolean useTls) {
                   : UA_MESSAGESECURITYMODE_NONE;
 }
 
-typedef struct UA_SecureChannelKeyLogger {
-    void (*localLogger)(UA_ChannelSecurityToken token, const UA_ByteString key, UA_ByteString iv, void* keyLoggerContext);
-    void (*remoteLogger)(UA_ChannelSecurityToken token, const UA_ByteString key, UA_ByteString iv, void* keyLoggerContext);
-    void* keyLoggerContext;
-} UA_SecureChannelKeyLogger;
-
-=======
->>>>>>> 9220fe36d (Add Keylog plugin to secure channel)
 struct UA_SecureChannel {
     UA_SecureChannelState state;
     UA_SecureChannelRenewState renewState;
@@ -571,8 +559,9 @@ void
 setBufPos(UA_MessageContext *mc);
 
 UA_StatusCode
-checkSymHeader(UA_SecureChannel *channel, const UA_UInt32 tokenId,
-StatusCode
+checkSymHeader(UA_SecureChannel *channel, const UA_UInt32 tokenId, UA_DateTime nowMonotonic);
+
+UA_StatusCode
 checkAsymHeader(UA_SecureChannel *channel,
                 const UA_AsymmetricAlgorithmSecurityHeader *asymHeader);
 

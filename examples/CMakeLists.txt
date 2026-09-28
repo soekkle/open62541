@@ -134,13 +134,11 @@ endif()
 if(UA_ENABLE_ENCRYPTION OR
    UA_ENABLE_ENCRYPTION STREQUAL "MBEDTLS" OR
    UA_ENABLE_ENCRYPTION STREQUAL "OPENSSL")
-    add_example(server_encryption encryption/server_encryption.c)
     if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR WIN32)
         add_example(server_encryption_filestore encryption/server_encryption_filestore.c)
     endif()
     add_example(server_encryption_keylog encryption/server_encryption_keylog.c)
     add_example(client_encryption_keylog encryption/client_encryption_keylog.c)
-    add_example(server_encryption_filestore encryption/server_encryption_filestore.c)
     add_example(client_encryption encryption/client_encryption.c)
     if(UA_ENABLE_TPM2_KEYSTORE)
         add_example(server_encryption_tpm_keystore encryption/server_encryption_tpm_keystore.c)
