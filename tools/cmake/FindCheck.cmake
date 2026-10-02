@@ -73,7 +73,7 @@ IF( NOT CHECK_FOUND )
       SET ( CHECK_INCLUDE_DIRS "${CHECK_INSTALL_DIR}/include" )
 #     Find_library() always returns the 64-bit version in "C:/Program Files/Check/lib" no matter what path is passed in
 #     FIND_LIBRARY( CHECK_LIBRARIES NAMES check PATHS "${CHECK_INSTALL_DIR}/lib" NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH )
-      SET ( CHECK_LIBRARIES "${CHECK_INSTALL_DIR}/lib/check.lib" )
+      SET ( CHECK_LIBRARIES "${CHECK_INSTALL_DIR}/lib/checkDynamic.lib" )
     ELSE ( CHECK_INSTALL_DIR )
       FIND_PATH( CHECK_INCLUDE_DIRS check.h )
       FIND_LIBRARY( CHECK_LIBRARIES NAMES check )

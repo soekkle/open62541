@@ -83,11 +83,7 @@ endif()
 #############################
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests)
-if (MSVC)
-    set(TESTS_BINARY_DIR ${CMAKE_BINARY_DIR}/bin/tests/${CMAKE_BUILD_TYPE})
-else()
-    set(TESTS_BINARY_DIR ${CMAKE_BINARY_DIR}/bin/tests)
-endif()
+set(TESTS_BINARY_DIR ${CMAKE_BINARY_DIR}/bin/tests)
 
 # Use additional plugins for testing
 set(test_plugin_sources
