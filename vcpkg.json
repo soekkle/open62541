@@ -1,0 +1,6 @@
+{
+    "dependencies": [
+        "check",
+        "openssl"
+    ]
+}

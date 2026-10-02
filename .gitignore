@@ -111,3 +111,6 @@ gen_review_docs.sh
 *.gcov
 *.gcda
 *.gcno
+
+# VCPKG
+vcpkg_installed/
