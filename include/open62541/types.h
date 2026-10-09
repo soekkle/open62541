@@ -992,6 +992,7 @@ typedef struct UA_DataTypeMember {
                                      type). */
     UA_Byte isArray    : 1;       /* The member is an array */
     UA_Byte isOptional : 1;       /* The member is an optional field */
+    UA_UInt32 maxArraySize;
 } UA_DataTypeMember;
 
 /* The DataType "kind" is an internal type classification. It is used to

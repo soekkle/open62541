@@ -434,7 +434,8 @@ class CGenerator:
                         m += " - sizeof(UA_%s)," % makeCIdentifier(type_name_before)
                 m += " /* .padding */\n"
                 m += ("    true" if member.is_array else "    false") + ", /* .isArray */\n"
-                m += ("    true" if member.is_optional else "    false") + "  /* .isOptional */\n}"
+                m += ("    true" if member.is_optional else "    false") + ", /* .isOptional */\n"
+                m += "    " + str(member.max_elements if member.is_array else 0)+"}"
                 # Don't add a trailing comma for the last entry
                 if i != size - 1:
                     m += ","

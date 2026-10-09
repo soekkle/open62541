@@ -261,7 +261,7 @@ UA_DataType_fromStructureDescription(UA_DataType *type,
         }
 
         /* Handle valuerank and array dimensions */
-        if(sf->valueRank == 1) {
+        if(sf->valueRank == UA_VALUERANK_ONE_DIMENSION) {
             /* 1D-array */
             if(sf->arrayDimensionsSize > 1 ||
                (sf->arrayDimensionsSize == 1 && sf->arrayDimensions[0] != 0)) {
@@ -399,7 +399,7 @@ UA_DataType_toStructureDescription(const UA_DataType *type,
                 return UA_STATUSCODE_BADOUTOFMEMORY;
             }
             sf->arrayDimensionsSize = 1;
-            *sf->arrayDimensions = 0;
+            *sf->arrayDimensions =  dtm->maxArraySize;
         }
     }
 

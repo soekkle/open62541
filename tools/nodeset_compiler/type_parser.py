@@ -143,11 +143,12 @@ class OpaqueType(Type):
 
 
 class StructMember:
-    def __init__(self, name, member_type, is_array, is_optional):
+    def __init__(self, name, member_type, is_array, is_optional, max_elements):
         self.name = name
         self.member_type = member_type
         self.is_array = is_array
         self.is_optional = is_optional
+        self.max_elements = max_elements
 
 
 class StructType(Type):
@@ -188,6 +189,10 @@ class StructType(Type):
             member_name = child.get("Name")
             member_name = member_name[:1].lower() + member_name[1:]
             is_array = bool(child.get("LengthField"))
+            if is_array:
+                maxElements = int(xml.get(child.get("LengthField"))) if bool(xml.get(child.get("LengthField"))) else 0
+            else:
+                maxElements = 0
 
             member_type_name = get_type_name(child.get("TypeName"))[1]
             if member_type_name == typename: # If a type contains itself, use self as member_type
@@ -198,7 +203,7 @@ class StructType(Type):
             else:
                 member_type = get_type_for_name(child.get("TypeName"), types, xmlNamespaces)
 
-            self.members.append(StructMember(member_name, member_type, is_array, member_is_optional))
+            self.members.append(StructMember(member_name, member_type, is_array, member_is_optional, maxElements))
 
         self.pointerfree = True
         for m in self.members:
